@@ -19,10 +19,6 @@ var codeSchema = mongoose.Schema({
 
 var Code = mongoose.model('Code', codeSchema, 'code');
 
-// QRCode.toDataURL('I am a pony!', function (err, url) {
-//     console.log(url + ' URL');
-//   })
-
 QRCode.toString('I am a pony!', {type:'utf8'}, async function (err, url) {
     let cod = new Code();
     if (err) console.log(err);
