@@ -23,10 +23,18 @@ var Code = mongoose.model('Code', codeSchema, 'code');
 //     console.log(url + ' URL');
 //   })
 
-QRCode.toString('I am a pony!',{type:'terminal'}, async function (err, url) {
-    console.log(url + ' STRING <<<<<<<<<<<<<<<<<<<<<<<');
-    let cod = new Code(url);
-    await cod.save(url)
+QRCode.toString('I am a pony!', {type:'utf8'}, async function (err, url) {
+    let cod = new Code();
+    if (err) console.log(err);
+
+    await cod.save({qrCode: url}, (err, code) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(code);
+        }
+    });
+    
 });
 
 app.listen(4000, () => {
