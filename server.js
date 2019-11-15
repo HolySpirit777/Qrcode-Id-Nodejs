@@ -24,11 +24,11 @@ var Code = mongoose.model('Code', codeSchema, 'code');
 
 function QrCodetoString(code) {
 
-    return JSON.stringify(qr.imageSync(code, {type: 'svg', size: 10 }));
+    return JSON.stringify(qr.imageSync(code, {type: 'svg', size: 10 }));     //   << Converts string to QRcode and then to string
 
 }
 
-var saveToDb = async (value) => {           //   << saving using the package imageSync
+var saveToDb = async (value) => {
 
     let cod = new Code({qrCode: value});
 
