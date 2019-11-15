@@ -34,9 +34,19 @@ var saveToDb = async (value) => {
 
     await cod.save((err, code) => { 
         if (err) {
+
             console.log(err);
+
         } else {
-            console.log(code);
+
+            console.log('The Qrcode was saved in the database rifa');
+
+            Code.find((err, code) => {       // << Query of the QRcode
+
+                if(err) console.log(err);
+                if(code) console.log(code);
+
+            });
         }
     });
 }
@@ -44,5 +54,5 @@ var saveToDb = async (value) => {
 saveToDb(QrCodetoString('SADFGSDGSD4W634634634'));
 
 app.listen(4000, () => {
-    console.log('Server started on port 4000')
+    console.log('Server started on port 4000');
 });
