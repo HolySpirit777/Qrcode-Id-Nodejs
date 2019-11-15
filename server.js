@@ -2,15 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
-var QRCode = require('qrcode');
 var Grid = require('gridfs');
 var qr = require('qr-image');
-var conv = require('binstring');
-
-var Schema = mongoose.Schema;
 app.use(bodyParser.json());
-
-Grid.mongo = mongoose.mongo;
 
 mongoose.connect('mongodb://localhost:27017/rifa', { useNewUrlParser: true, useUnifiedTopology: true } , function (err) {
 
@@ -20,6 +14,8 @@ mongoose.connect('mongodb://localhost:27017/rifa', { useNewUrlParser: true, useU
  
 });
 
+var Schema = mongoose.Schema;
+
 var codeSchema = new Schema({
     qrCode: { type: String}
 });
@@ -27,7 +23,7 @@ var codeSchema = new Schema({
 var Code = mongoose.model('Code', codeSchema, 'code');
 
 function toStringQrCode(code) {
-    return JSON.stringify(qr.imageSync(code, {type: 'svg', size: 5 }));
+    return JSON.stringify(qr.imageSync(code, {type: 'svg', size: 10 }));
 }
 
 var saveToDb = async (value) => {           //   << saving using the package imageSync
