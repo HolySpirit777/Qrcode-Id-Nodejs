@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
-var qr = require('qr-image');
+const qr = require('qr-image');
 
 app.use(bodyParser.json());
 
