@@ -22,7 +22,7 @@ var codeSchema = new Schema({
 
 var Code = mongoose.model('Code', codeSchema, 'code');
 
-function toStringQrCode(code) {
+function QrCodetoString(code) {
 
     return JSON.stringify(qr.imageSync(code, {type: 'svg', size: 10 }));
 
@@ -41,7 +41,7 @@ var saveToDb = async (value) => {           //   << saving using the package ima
     });
 }
 
-saveToDb(toStringQrCode('SADFGSDGSD4W634634634'));
+saveToDb(QrCodetoString('SADFGSDGSD4W634634634'));
 
 app.listen(4000, () => {
     console.log('Server started on port 4000')
