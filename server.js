@@ -23,11 +23,15 @@ var codeSchema = new Schema({
 var Code = mongoose.model('Code', codeSchema, 'code');
 
 function toStringQrCode(code) {
+
     return JSON.stringify(qr.imageSync(code, {type: 'svg', size: 10 }));
+
 }
 
 var saveToDb = async (value) => {           //   << saving using the package imageSync
+
     let cod = new Code({qrCode: value});
+
     await cod.save((err, code) => { 
         if (err) {
             console.log(err);
