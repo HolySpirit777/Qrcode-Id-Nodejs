@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
 var QRCode = require('qrcode');
+var Grid = require('gridfs');
+var Schema = mongoose.Schema;
 app.use(bodyParser.json());
 
 mongoose.connect('mongodb://localhost:27017/rifa', { useNewUrlParser: true, useUnifiedTopology: true } , function (err) {
@@ -13,23 +15,17 @@ mongoose.connect('mongodb://localhost:27017/rifa', { useNewUrlParser: true, useU
  
 });
 
-var codeSchema = mongoose.Schema({
-    qrCode: String
+var codeSchema = new Schema({
+    qrCode: { type: String}
 });
 
 var Code = mongoose.model('Code', codeSchema, 'code');
 
-QRCode.toString('I am a pony!', {type:'utf8'}, async function (err, url) {
+QRCode.toString('I am a pony!', {type:'utf8'}, function (err, url) {
     let cod = new Code();
     if (err) console.log(err);
 
-    await cod.save({qrCode: url}, (err, code) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(code);
-        }
-    });
+    cod.save({qrCode: url});
     
 });
 
