@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 var QRCode = require('qrcode');
 var Grid = require('gridfs');
+var qr = require('qr-image');
 var Schema = mongoose.Schema;
 app.use(bodyParser.json());
 
@@ -21,13 +22,9 @@ var codeSchema = new Schema({
 
 var Code = mongoose.model('Code', codeSchema, 'code');
 
-QRCode.toString('I am a pony!', {type:'utf8'}, function (err, url) {
-    let cod = new Code();
-    if (err) console.log(err);
+var qr_svg = qr.imageSync('I love QR!', { type: 'svg', size: 5 });
 
-    cod.save({qrCode: url});
-    
-});
+console.log(qr_svg);
 
 app.listen(4000, () => {
     console.log('Server started on port 4000')
