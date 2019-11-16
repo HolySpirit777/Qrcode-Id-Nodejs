@@ -17,6 +17,7 @@
     "mongodb": "^3.3.4",
     "mongoose": "^5.7.10",
     "qr-image": "^3.2.0",
-    "qrcode": "^1.4.4"
+    "qrcode": "^1.4.4",
+    "random-id": "^1.0.3"
   }
 }

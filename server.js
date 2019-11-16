@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
 const qr = require('qr-image');
+const randomId = require('random-id');
 
 app.use(bodyParser.json());
 
@@ -51,7 +52,13 @@ var saveToDb = async (value) => {
     });
 }
 
-saveToDb(QrCodetoString('SADFGSDGSD4W634634634'));
+let ticketIdCode = randomId(10, 'A0');
+let secretIdCode = randomId(12, 'A0')
+
+saveToDb(QrCodetoString(secretIdCode));
+
+console.log('The ticket ID code: ' + ticketIdCode);
+console.log('The secret ID code: ' + secretIdCode);
 
 app.listen(4000, () => {
     console.log('Server started on port 4000');
